@@ -1,0 +1,15 @@
+{% extends "mundial/base.html" %}
+{% block content %}
+    {% for match in match_list %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">Fifa World Cup Match</a>
+              <small class="text-muted">10.10.2022</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ match.match_name }}</a></h2>
+            <p class="article-content">Match result: {{ match.score }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
