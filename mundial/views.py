@@ -9,7 +9,8 @@ from .models import Player as PlayerModel
 from .models import Country as CountryModel
 from .models import Match as MatchModel
 from .models import PlayerMatch as PlayerMatchModel
-from .serializers import PlayerSerializer, CountrySerializer, MatchSerializer, PlayerMatchSerializer
+from .models import Stadium as StadiumModel
+from .serializers import PlayerSerializer, CountrySerializer, MatchSerializer, PlayerMatchSerializer, StadiumSerializer
 
 
 class Home(mixins.ListModelMixin, GenericAPIView):
@@ -78,6 +79,11 @@ class AbstractCRUDView(
                 f"Please specify {self.queryset.model.__name__} ID in order to delete data.", status=400
             )
         return self.destroy(request)
+
+
+class Stadium(AbstractCRUDView):
+    serializer_class = StadiumSerializer
+    queryset = StadiumModel.objects.all()
 
 
 class Player(AbstractCRUDView):

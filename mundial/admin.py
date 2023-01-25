@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Country, Player, Match, PlayerMatch
+from .models import Country, Player, Match, PlayerMatch, Stadium
 
 
 MODELS_TO_REGISTER = [
@@ -7,5 +7,6 @@ MODELS_TO_REGISTER = [
     Player,
     Match,
     PlayerMatch,
+    Stadium,
 ]
 admin.site.register(MODELS_TO_REGISTER)

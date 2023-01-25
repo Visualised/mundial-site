@@ -1,5 +1,13 @@
 from rest_framework import serializers
-from .models import Player, Country, Match, PlayerMatch
+from .models import Player, Country, Match, PlayerMatch, Stadium
+
+
+class StadiumSerializer(serializers.ModelSerializer):
+    total_matches = Stadium.total_matches
+
+    class Meta:
+        model = Stadium
+        fields = ("name", "country", "club", "capacity", "field_size", "opening_date", "total_matches")
 
 
 class CountrySerializer(serializers.ModelSerializer):
@@ -23,10 +31,11 @@ class MatchSerializer(serializers.ModelSerializer):  # nietestowane
 
     score = Match.score
     match_name = Match.match_name
+    stadium = serializers.PrimaryKeyRelatedField(queryset=Stadium.objects.all())
 
     class Meta:
         model = Match
-        fields = ("country_1", "country_2", "country_1_score", "country_2_score", "score", "match_name")
+        fields = ("country_1", "country_2", "country_1_score", "country_2_score", "score", "match_name", "stadium")
 
 
 class PlayerMatchSerializer(serializers.ModelSerializer):

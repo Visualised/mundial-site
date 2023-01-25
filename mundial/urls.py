@@ -12,4 +12,5 @@ urlpatterns = [
     path("country/<int:country_id>/stats", views.CountryStats.as_view(), name="mundial-country-stats"),
     path("match/", views.Match.as_view(), name="mundial-match"),
     path("match/<int:pk>", views.Match.as_view(), name="mundial-match-id"),
+    path("stadium/", views.Stadium.as_view(), name="mundial-stadium"),
 ]

@@ -38,11 +38,28 @@ class Player(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 
+class Stadium(models.Model):
+    name = models.CharField(max_length=100)
+    country = models.CharField(max_length=50)
+    club = models.CharField(max_length=50, null=True, blank=True)
+    capacity = models.IntegerField()
+    field_size = models.IntegerField()
+    opening_date = models.DateField()
+
+    @property
+    def total_matches(self):
+        return Match.objects.filter(stadium=self).count()
+
+    def __str__(self):
+        return self.name
+
+
 class Match(models.Model):
     country_1 = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="country_1")
     country_2 = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="country_2")
     country_1_score = models.IntegerField()
     country_2_score = models.IntegerField()
+    stadium = models.ForeignKey(Stadium, on_delete=models.DO_NOTHING)
 
     @property
     def score(self):
